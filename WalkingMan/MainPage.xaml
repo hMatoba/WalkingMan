@@ -1,0 +1,77 @@
+﻿<Page
+    x:Class="WalkingMan.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WalkingMan"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="Segoe UI">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="130" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Padding="5"  Name="selectedItem" Background="AliceBlue" Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Name="albumTitleBlock" FontSize="14" FontWeight="Bold"></TextBlock>
+            <ScrollViewer Grid.Row="1" Padding="8, 8, 0, 0">
+                <StackPanel Name="trackPanel" Margin="8, 0, 0, 0"></StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <ScrollViewer Grid.Column="0" Grid.Row="0" Background="#FFF0FFF0" Padding="0,5,0,5">
+            <ListView Name="albumPanel">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </ScrollViewer>
+
+        <StackPanel Name="controls" Grid.Row="1">
+            <MediaElement Name="mediaElement" Width="0" Height="0" 
+                          Volume="{Binding ElementName=volumeSlider, Path=Value}"></MediaElement>
+            <StackPanel Width="auto" Height="auto" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="rewindButton" Margin="10, 0, 10, 5" Width="30" Height="30" Padding="0">
+                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="Assets/appbar.control.rewind.png"></Image>
+                </Button>
+                <Button Name="playButton" Margin="10, 0, 10, 5" Width="30" Height="30" Padding="0">
+                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="Assets/appbar.control.resume.png"></Image>
+                </Button>
+                <Button Name="forwardButton" Margin="10, 0, 10, 5" Width="30" Height="30" Padding="0">
+                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="Assets/appbar.control.fastforward.png"></Image>
+                </Button>
+            </StackPanel>
+            <StackPanel Name="sbarContainer" Width="auto" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+                <Slider Name="seekbar" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200"></Slider>
+                <StackPanel Height="30" Width="auto" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Name="renewButton" Width="60" Height="30" HorizontalAlignment="Center" Visibility="Collapsed" >Reload Library</Button>
+                    <ProgressRing Name="libProgress" Height="30" HorizontalAlignment="Center" IsActive="False" Visibility="Collapsed"></ProgressRing>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Visibility="Collapsed">
+                <StackPanel Width="40" Height="40">
+                    <Image Name="soundImage0" Source="Assets/appbar.sound.mute.png" Width="40" Height="40" Visibility="Collapsed"/>
+                    <Image Name="soundImage1" Source="Assets/appbar.sound.0.png" Width="40" Height="40" />
+                    <Image Name="soundImage2" Source="Assets/appbar.sound.1.png" Width="40" Height="40" Visibility="Collapsed"/>
+                    <Image Name="soundImage3" Source="Assets/appbar.sound.2.png" Width="40" Height="40" Visibility="Collapsed"/>
+                    <Image Name="soundImage4" Source="Assets/appbar.sound.3.png" Width="40" Height="40" Visibility="Collapsed"/>
+                </StackPanel>
+                <Slider x:Name="volumeSlider" Width="200" Maximum="1.0" Minimum="0.0" Value="0.1" StepFrequency="0.01" Margin="0" Height="38"/>
+            </StackPanel>
+        </StackPanel>
+
+
+    </Grid>
+</Page>
